@@ -6,7 +6,7 @@ ENV NOTVISIBLE="in users profile"
 ADD config /config
 ADD entrypoint.sh /entrypoint.sh
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor kde-standard \
+&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor kde-full \
 && locale-gen ru_RU.UTF-8 \
 && update-locale LANG=ru_RU.UTF-8 \
 && mkdir /var/run/sshd \
@@ -17,6 +17,8 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 && chmod 755 /entrypoint.sh \
 && chmod -R 700 /config \
 && cp /config/supervisor/sshd.conf /etc/supervisor/conf.d/sshd.conf \
-&& cp /config/supervisor/x2go.conf /etc/supervisor/conf.d/x2go.conf
+&& cp /config/supervisor/x2go.conf /etc/supervisor/conf.d/x2go.conf \
+&& useradd -s /bin/bash zveronline
+
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 ENTRYPOINT ["/entrypoint.sh"]
