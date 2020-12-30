@@ -1,12 +1,15 @@
-FROM registry.zveronline.ru/docker/docker-x2go:kde
+FROM registry.zveronline.ru/docker/docker-x2go:xfce
 
 ENV TZ=Europe/Moscow
 ENV NOTVISIBLE="in users profile"
+ENV LANG=ru_RU.UTF-8 \
+LANGUAGE=ru_RU.UTF-8 \
+USER_PASSWORD=qwe123
 
 ADD config /config
 ADD entrypoint.sh /entrypoint.sh
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
-&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor kde-full \
+&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor xfce4 xfce4-goodies \
 && locale-gen ru_RU.UTF-8 \
 && update-locale LANG=ru_RU.UTF-8 \
 && mkdir /var/run/sshd \
