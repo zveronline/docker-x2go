@@ -15,7 +15,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 && sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd \
 && echo "export VISIBLE=now" >> /etc/profile \
 && chmod 755 /entrypoint.sh \
-&& chmod -R 700 /config
-
-CMD ["/usr/sbin/sshd", "-D"]
+&& chmod -R 700 /config \
+&& cp /config/supervisor/sshd.conf /etc/supervisor/conf.d/sshd.conf
+CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 ENTRYPOINT ["/entrypoint.sh"]
