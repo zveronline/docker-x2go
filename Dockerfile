@@ -16,6 +16,7 @@ RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 && echo "export VISIBLE=now" >> /etc/profile \
 && chmod 755 /entrypoint.sh \
 && chmod -R 700 /config \
-&& cp /config/supervisor/sshd.conf /etc/supervisor/conf.d/sshd.conf
+&& cp /config/supervisor/sshd.conf /etc/supervisor/conf.d/sshd.conf \
+&& cp /config/supervisor/x2go.conf /etc/supervisor/conf.d/x2go.conf
 CMD ["/usr/bin/supervisord", "-n", "-c", "/etc/supervisor/supervisord.conf"]
 ENTRYPOINT ["/entrypoint.sh"]
