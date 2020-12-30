@@ -7,7 +7,7 @@ ADD config /config
 ADD entrypoint.sh /entrypoint.sh
 RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone \
 && cp /config/console-setup /etc/default/ \
-&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor kubuntu-desktop \
+&& apt-get update && apt-get upgrade -y && apt-get install -y nano htop mc git openssh-server mysql-client postgresql-client zip tar gzip p7zip unzip perl procps wget screen openjdk-8-jdk locales dialog apt-utils x2goserver x2goserver-xsession supervisor xfce4 xfce4-goodies \
 && locale-gen ru_RU.UTF-8 \
 && update-locale LANG=ru_RU.UTF-8 \
 && mkdir /var/run/sshd \
